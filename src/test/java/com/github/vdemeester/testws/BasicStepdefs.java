@@ -6,6 +6,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -59,6 +60,19 @@ public class BasicStepdefs {
         assertNotNull(this.todo);
         assertNull(this.todo.getDue());
     }
+
+    @Then("^It is not completed$")
+    public void it_is_not_completed() throws Throwable {
+        assertNotNull(this.todo);
+        assertFalse(this.todo.isCompleted());
+    }
+
+    @Then("^It has a due date that is (\\d+)-(\\d+)-(\\d+) (\\d+):(\\d+)$")
+    public void it_has_a_due_date_that_is(int year, int month, int dayOfMonth, int hour, int minute) throws Throwable {
+        LocalDateTime expectedDateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        assertEquals(expectedDateTime, this.todo.getDue());
+    }
+
 
     @Then("^I get an IllegalArgumentException$")
     public void i_get_an_IllegalArgumentException() throws Throwable {
