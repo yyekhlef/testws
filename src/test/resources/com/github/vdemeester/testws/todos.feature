@@ -14,4 +14,4 @@ Feature: TodoService tests
     When I run findOne with id 4
     Then I get an IllegalArgumentException
 
-  # TODO (Bonus) Définir un scenario qui va chercher le Todo avec l'id 2
+  # TODO (Bonus) Définir un scénario qui va chercher le Todo avec l'id 2
