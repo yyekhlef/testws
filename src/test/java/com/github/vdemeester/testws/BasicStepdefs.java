@@ -21,46 +21,49 @@ public class BasicStepdefs {
 
     @When("^I run findAll$")
     public void i_run_findAll() throws Throwable {
-        // TODO Appeler todoService.findAll et le stocker dans todos
-        // NOTE fait un try/catch et mettez l'exception dans exceptionThrown
-        throw new PendingException(); // TODO à suprrimer
+        try {
+            this.todos = todoService.findAll();
+        } catch (Exception e) {
+            this.exceptionThrown = e;
+        }
     }
 
     @Then("^I get a list of size (\\d+)$")
     public void i_get_a_list_of_size(int todoListSize) throws Throwable {
-        // TODO Valider la taille de todos par rapport à todoListSize (en utilisant les assert de JUnit)
-        throw new PendingException(); // TODO à suprrimer
+        assertNotNull(this.todos);
+        assertEquals(todoListSize, this.todos.size());
     }
 
     @When("^I run findOne with id (\\d+)$")
     public void i_run_findOne_with_id(int todoId) throws Throwable {
-        // TODO Appeler todoService.findOne et le stocker dans todos
-        // NOTE fait un try/catch et mettez l'exception dans exceptionThrown
-        throw new PendingException(); // TODO à suprrimer
+        try {
+            this.todo = todoService.findOne(todoId);
+        } catch (Exception e) {
+            this.exceptionThrown = e;
+        }
     }
 
     @Then("^I get a Todo object$")
     public void i_get_a_Todo_object() throws Throwable {
-        // TODO S'assurer que todo n'est pas null
-        throw new PendingException(); // TODO à suprrimer
+        assertNotNull(this.todo);
     }
 
     @Then("^It is completed$")
     public void it_is_completed() throws Throwable {
-        // TODO s'assurer que l'attribut completed to todo est à true
-        throw new PendingException(); // TODO à suprrimer
+        assertNotNull(this.todo);
+        assertTrue(this.todo.isCompleted());
     }
 
     @Then("^It has no due date$")
     public void it_has_no_due_date() throws Throwable {
-        // TODO s'assurer que l'attribut dueDate de todo est null
-        throw new PendingException(); // TODO à suprrimer
+        assertNotNull(this.todo);
+        assertNull(this.todo.getDue());
     }
 
     @Then("^I get an IllegalArgumentException$")
     public void i_get_an_IllegalArgumentException() throws Throwable {
-        // TODO valider que exceptionThrown n'est pas null et qu'il est du type souhaité
-        throw new PendingException(); // TODO à suprrimer
+        assertNotNull(this.exceptionThrown);
+        assertTrue(this.exceptionThrown instanceof IllegalArgumentException);
     }
 
 }
