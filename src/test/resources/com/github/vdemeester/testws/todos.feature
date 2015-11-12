@@ -15,3 +15,9 @@ Feature: TodoService tests
     Then I get an IllegalArgumentException
 
   # TODO (Bonus) Définir un scénario qui va chercher le Todo avec l'id 2
+
+  Scenario: Find another existent Todo
+    When I run findOne with id 2
+    Then I get a Todo object
+    And  It is not completed
+    And  It has a due date
